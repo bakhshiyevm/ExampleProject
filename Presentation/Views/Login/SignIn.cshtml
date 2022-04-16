@@ -21,6 +21,7 @@
                         <form method="post">
                             <h3 class="mb-5">Sign In</h3>
 
+
                             <div class="form-outline mb-4">
                                 <label class="form-label">Username</label>
                                 <input type="text" class="form-control form-control-lg" name="Username" />
@@ -38,12 +39,12 @@
                             </button>
 
 
-                            <partial name="~/Views/Shared/Message.cshtml"/>
-                                
-                                <div class="form-outline mb-4">
-                                    Don't have account? <a class="form-label" asp-controller="Login"
-                                                           asp-action="SignUp">Sign Up</a>
-                                </div>
+                            <partial name="~/Views/Shared/Message.cshtml" />
+
+                            <div class="form-outline mb-4">
+                                Don't have account? <a class="form-label" asp-controller="Login"
+                                                       asp-action="SignUp">Sign Up</a>
+                            </div>
                         </form>
                     </div>
                 </div>
