@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Presentation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <form method="post">
+                            <h3 class="mb-5">Sign In</h3>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control form-control-lg" name="Username" />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control form-control-lg" name="Email" />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label">PhoneNumber</label>
+                                <input type="tel" class="form-control form-control-lg" name="PhoneNumber" />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control form-control-lg" name="Password" />
+                            </div>
+
+
+                            <button class="btn btn-primary btn-lg btn-block mb-4" type="submit"
+                                    asp-controller="Login" asp-action="SignUp">
+                                Sign Up
+                            </button>
+
+
+                            <partial name="~/Views/Shared/Message.cshtml"/>
+
+                                <div class="form-outline mb-4">
+                                    Don't have account? <a class="form-label" asp-controller="Login"
+                                                           asp-action="SignIn">Sign In</a>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
