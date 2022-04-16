@@ -20,11 +20,13 @@ namespace Presentation.Controllers
             this.service = service;
         }
 
+        [Route("/Main")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Route("/Products")]
         public IActionResult List()
         {
             //var x = Convert.ToInt32((HttpContext.Session.GetString("id")??"0"));

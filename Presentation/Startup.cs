@@ -76,9 +76,7 @@ namespace Presentation
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Login}/{action=SignIn}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

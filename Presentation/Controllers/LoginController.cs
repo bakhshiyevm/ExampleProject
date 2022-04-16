@@ -17,6 +17,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
+        [Route("SignIn")]
         public IActionResult SignIn(UserDTO user)
         {
             try
@@ -32,12 +33,14 @@ namespace Presentation.Controllers
             }
         }
         [HttpGet]
+        [Route("SignIn")]
         public IActionResult SignIn()
         {
             HttpContext.Session.Clear();
             return View("SignIn");
         }
         [HttpPost]
+        [Route("SignUp")]
         public IActionResult SignUp(UserDTO user)
         {
             try
@@ -54,6 +57,7 @@ namespace Presentation.Controllers
             }
         }
         [HttpGet]
+        [Route("SignUp")]
         public IActionResult SignUp()
         {
             return View();
