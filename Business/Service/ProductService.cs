@@ -19,8 +19,12 @@ namespace Business.Service
         {
 
         }
-
-        
+        public IEnumerable<ProductDTO> GetProductByCategory(int catId)
+        {
+            var entites = repository.Find(x => x.CategoryId == catId);
+            var products = mapper.Map<IEnumerable<ProductDTO>>(entites);
+            return products;
+        }
 
         public void AddToCart(int id, int userId)
         {

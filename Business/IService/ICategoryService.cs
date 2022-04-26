@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Business.IService
 {
-    public interface IProductService : IBaseService<ProductDTO, Product,ProductDTO>
+    public interface ICategoryService : IBaseService<CategoryDTO, Category, CategoryDTO>
     {
-        public IEnumerable<ProductDTO> GetProductByCategory(int catId);
+
     }
 }

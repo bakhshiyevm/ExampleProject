@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class ProductDTO : BaseDTO
+    public class CategoryDTO : BaseDTO
     {
         public string Name { get; set; }
-        public string ImgPath { get; set; }
-        public double Price { get; set; }
-        public int CategoryId { get; set; }
         public string Desc { get; set; }
     }
 }

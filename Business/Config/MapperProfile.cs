@@ -19,6 +19,9 @@ namespace Business.Config
 
             CreateMap<ProductDTO, Product>();
             CreateMap<Product, ProductDTO>();
+
+            CreateMap<CategoryDTO, Category>();
+            CreateMap<Category, CategoryDTO>();
         }
     }
 }

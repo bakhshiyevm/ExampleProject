@@ -13,12 +13,7 @@ namespace Presentation.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductService service;
 
-        public HomeController(IProductService service)
-        {
-            this.service = service;
-        }
 
         [Route("/Main")]
         public IActionResult Index()
@@ -26,14 +21,6 @@ namespace Presentation.Controllers
             return View();
         }
 
-        [Route("/Products")]
-        public IActionResult List()
-        {
-            //var x = Convert.ToInt32((HttpContext.Session.GetString("id")??"0"));
-
-            var products = service.Get();
-            return View("Products",products);
-        }
 
     }
 }

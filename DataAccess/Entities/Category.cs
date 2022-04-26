@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    public class Product : BaseEntity
+    public class Category : BaseEntity
     {
         public string Name { get; set; }
-        public string ImgPath { get; set; }
-        public double Price { get; set; }
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-
         public string Desc { get; set; }
+        public List<Product> Products { get; set; } 
     }
 }
