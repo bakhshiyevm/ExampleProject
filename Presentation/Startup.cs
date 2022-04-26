@@ -16,6 +16,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Presentation
 {
@@ -33,8 +36,10 @@ namespace Presentation
         {
             services.AddSession();
 
+
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+                x => x.MigrationsAssembly("DataAccess"))
                 );
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Business.Helper;
 using Business.IService;
 using DataAccess.Entities;
 using DTO;
@@ -21,12 +22,20 @@ namespace Business.Service
 
         public UserDTO Login(UserDTO dto)
         {
-            var res = repository.Find(user => user.Username == dto.Username
-            && user.Password == dto.Password);
 
-            if (res.Count() != 1) 
+            var res = repository.Find(user => user.Username == dto.Username);
+            if (res.Count() == 1) 
             {
-                throw new Exception("Incorrect username or password!");
+                var user = res.FirstOrDefault();
+                var dbHash = Crypto.GenerateSHA256Hash(dto.Password, user.Salt);
+                if (user.PasswordHash != dbHash) 
+                {
+                    throw new PasswordException();
+                }
+            }
+            else 
+            {
+                throw new UsernameException();
             }
             return mapper.Map<UserDTO>(res.First());
         }
@@ -37,10 +46,12 @@ namespace Business.Service
             || user.Email == dto.Email || user.PhoneNumber == dto.PhoneNumber) ;
             if (res.Count() != 0) 
             {
-                throw new Exception("Same username/email/password is already signed up!");
+                throw new UsernameExistsException(); ;
             }
             else 
             {
+                dto.Salt = Crypto.GenerateSalt();
+                dto.PasswordHash = Crypto.GenerateSHA256Hash(dto.Password, dto.Salt);
                 base.Create(dto);
             }
 

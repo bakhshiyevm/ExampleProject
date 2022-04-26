@@ -11,20 +11,14 @@ namespace DataAccess
 {
     public class AppDbContext : DbContext
     {
-        DbSet<User> Users { get; set; }
-        DbSet<Product> Products { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
-            try
-            {
-                Database.EnsureCreated();
-            }
-            finally
-            {
-            }
-
-
+            //Database.EnsureCreated();
         }
+
+        DbSet<User> Users { get; set; }
+        DbSet<Product> Products { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
