@@ -9,21 +9,21 @@
     <div class="row mt-1 mb-2">
 
 
-        @foreach (var item in Model)
-        {
-        <div class="col-lg-4 mb-5">
-            <a asp-controller="Products" asp-action="GetProducts" asp-route-catId="@item.Id">
-                <div class="card mb-3 mx-auto" style="max-width :60%">
-                    <div class="card-header">
-                        @item.Name
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">@item.Desc</p>
-                    </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-5">
+                    <a asp-controller="Products" asp-action="GetProducts" asp-route-catId="@item.Id">
+                        <div class="card mb-3 mx-auto" style="max-width :60%">
+                            <div class="card-header">
+                                @item.Name
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">@item.Desc</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        }
+            }
 
     </div>
 </div>

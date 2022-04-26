@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
+    public enum SortOrder 
+    {
+        NameAsc,
+        NameDesc,
+        PriceAsc,
+        PriceDesc
+    }
     public class ProductDTO : BaseDTO
     {
         public string Name { get; set; }

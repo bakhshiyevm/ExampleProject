@@ -6,31 +6,34 @@
         <h1>Product List</h1>
     </div>
 
-    <div class="row mt-1 mb-2">
-
-
-        @foreach (var item in Model)
-        {
-        <div class="col-lg-4 mb-5">
-            <div class="card mb-3 mx-auto" style="max-width :60%" >
-                <div class="card-header">
-                    @item.Name
-                </div>
-                <div class="card-body">
-                    <p class="card-text">@item.Desc</p>
-                    <p class="card-text">@item.Price</p>
-
-                    <div class="text-light ">
-                        <a class="btn btn-secondary btn-sm" asp-controller="Home" asp-action="AddCart" asp-route-id="@item.Id">
-                            <span class="glyphicon glyphicon-shopping-cart">
-                            </span>
-                            Add to Cart
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <div class="row justify-content-md-center">
+        <div class="col col-md-auto">
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item list-group-item-secondary mx-auto"><a asp-action="GetProducts" asp-route-sortOrder="@ViewBag.NameSort">Name</a></li>
+                <li class="list-group-item list-group-item-secondary"><a asp-action="GetProducts" asp-route-sortOrder="@ViewBag.PriceSort">Price</a></li>
+            </ul>
         </div>
-        }
-
     </div>
-</div>
+        <div class="row mt-1 mb-2">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-5">
+                    
+                        <div class="card mb-3 mx-auto" style="max-width :60%">
+                            <a asp-controller="Products" asp-action="GetProduct" asp-route-id="@item.Id">
+                                <div class="card-header">
+                                    @item.Name
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">@item.Desc</p>
+                                    <p class="card-text">@item.Price</p>
+                                </div>
+
+                            </a>
+                        </div>
+                </div>
+            }
+
+        </div>
+    </div>
