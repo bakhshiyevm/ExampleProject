@@ -73,7 +73,15 @@ namespace Presentation.Controllers
 
             return View("Product", product);
         }
+        [HttpPost]
+        public IActionResult AddToCart(int id)
+        {
 
+            var product = prodService.Get(id);
+
+            ViewBag.Success = "Successfuly added!";
+            return View("Product", product);
+        }
 
 
     }

@@ -53,6 +53,7 @@ namespace Repo.Repos
         }
         public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> expression, int page, int pageSize)
         {
+          
                 return _dbSet.Where(expression).Skip((page - 1) * pageSize).Take(pageSize);
             
         }
