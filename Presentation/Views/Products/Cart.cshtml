@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProductDTO>
+
+<div id="parallax-world-of-ugg">
+
+    <div class="title">
+        <h1>CART</h1>
+    </div>
+
+
+        <div class="row mt-1 mb-2">
+
+            @foreach (var item in Model)
+            {
+            <div class="col-lg-4 mb-5">
+
+                <div class="card mb-3 mx-auto" style="max-width :60%">
+                    <a asp-controller="Products" asp-action="GetProduct" asp-route-id="@item.Id">
+                        <div class="card-header">
+                            @item.Name
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@item.Desc</p>
+                            <p class="card-text">@item.Price</p>
+                        </div>
+
+                    </a>
+                </div>
+
+                <partial name="~/Views/Shared/Message.cshtml" />
+                
+
+                <form method="post">
+
+                    <button class="btn btn-primary btn-lg btn-block mb-4" type="submit"
+                            asp-controller="Products" asp-action="Payment">
+                        Payment
+                    </button>
+                </form>
+            </div>
+            }
+
+        </div>
+    </div>

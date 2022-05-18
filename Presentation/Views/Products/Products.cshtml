@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductDTO>
+﻿@model PagedResponse<ProductDTO>
 
 <div id="parallax-world-of-ugg">
 
@@ -14,26 +14,52 @@
             </ul>
         </div>
     </div>
-        <div class="row mt-1 mb-2">
+    
+    <form method="get">
+        <div class="form-inline form-group">
+            <label class="control-label">Name: </label>
+            <input name="name" class="form-control" />
 
-            @foreach (var item in Model)
-            {
-                <div class="col-lg-4 mb-5">
-                    
-                        <div class="card mb-3 mx-auto" style="max-width :60%">
-                            <a asp-controller="Products" asp-action="GetProduct" asp-route-id="@item.Id">
-                                <div class="card-header">
-                                    @item.Name
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">@item.Desc</p>
-                                    <p class="card-text">@item.Price</p>
-                                </div>
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
 
-                            </a>
+    <div class="row mt-1 mb-2">
+
+        @foreach (var item in Model.DTOs)
+        {
+            <div class="col-lg-4 mb-5">
+
+                <div class="card mb-3 mx-auto" style="max-width :60%">
+                    <a asp-controller="Products" asp-action="GetProduct" asp-route-id="@item.Id">
+                        <div class="card-header">
+                            @item.Name
                         </div>
+                        <div class="card-body">
+                            <p class="card-text">@item.Desc</p>
+                            <p class="card-text">@item.Price</p>
+                        </div>
+
+                    </a>
                 </div>
-            }
+            </div>
+        }
+
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" asp-action="GetProducts" asp-route-page="@(Model.Page-1)">Previous</a></li>
+            <li class="page-item"><a class="page-link" asp-action="GetProducts" asp-route-page="@(Model.Page+1)">Next</a></li>
+        </ul>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">10</a>
+                <a class="dropdown-item" href="#">25</a>
+                <a class="dropdown-item" href="#">50</a>
+            </div>
 
         </div>
     </div>
+</div>

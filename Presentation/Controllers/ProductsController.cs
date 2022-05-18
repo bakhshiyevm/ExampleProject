@@ -1,5 +1,6 @@
 ﻿using Business.IService;
 using DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,10 @@ namespace Presentation.Controllers
             var products = catService.Get();
             return View("Categories", products);
         }
+
         [HttpGet]
         [Route("/Categories/{catId}/Products")]
-        public IActionResult GetProducts(int catId, SortOrder sortOrder = SortOrder.NameAsc)
+        public IActionResult GetProducts(int catId, SortOrder sortOrder = SortOrder.NameAsc, string name = null, int? page = 1 , int? pageSize = 25)
         {
             //var x = Convert.ToInt32((HttpContext.Session.GetString("id")??"0"));
             //prodService.Create(new ProductDTO { Name = "PC1",Price=123, CategoryId=1, Desc = "Personal Computers" });
@@ -47,7 +49,10 @@ namespace Presentation.Controllers
             //prodService.Create(new ProductDTO { Name = "Laptop1", CategoryId = 4, Price = 3, Desc = "Personal Computers" });
             //prodService.Create(new ProductDTO { Name = "Laptop2", CategoryId = 4, Price = 21123, Desc = "Personal Computers" });
             //prodService.Create(new ProductDTO { Name = "Laptop3", CategoryId = 4, Price = 21, Desc = "Personal Computers" });
-            var products = prodService.GetProductByCategory(catId);
+            
+
+            var products = prodService.GetProductByCategory(catId,name,page,pageSize);
+
 
             ViewData["NameSort"] = sortOrder == SortOrder.NameAsc ? SortOrder.NameDesc : SortOrder.NameAsc;
             ViewData["PriceSort"] = sortOrder == SortOrder.PriceAsc ? SortOrder.PriceDesc : SortOrder.PriceAsc;
@@ -61,7 +66,9 @@ namespace Presentation.Controllers
                 _ => products.OrderBy(s => s.Name),
             };
 
-            return View("Products", products);
+            var pagedRs = new PagedResponse<ProductDTO>(page, pageSize,products);
+
+            return View("Products", pagedRs);
         }
         [HttpGet]
         [Route("/Categories/Products/{id}")]
@@ -74,15 +81,32 @@ namespace Presentation.Controllers
             return View("Product", product);
         }
         [HttpPost]
-        public IActionResult AddToCart(int id)
+        public void AddToCart(int id)
         {
-
-            var product = prodService.Get(id);
+            var userId = Convert.ToInt32(HttpContext.Session.GetString("id"));
+            prodService.AddToCart(id,userId);
 
             ViewBag.Success = "Successfuly added!";
-            return View("Product", product);
+            //return View("Product");
         }
 
+        [HttpGet]
+        public IActionResult Cart()
+        {
+            var userId = Convert.ToInt32(HttpContext.Session.GetString("id"));
+            var prods= prodService.GetCart( userId);
+
+            return View("Cart",prods);
+        }
+
+        [HttpPost]
+        public IActionResult Payment()
+        {
+            var userId = Convert.ToInt32(HttpContext.Session.GetString("id"));
+            var payment = prodService.Payment(userId);
+
+            return View("Payment", payment);
+        }
 
     }
 }

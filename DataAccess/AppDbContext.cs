@@ -18,11 +18,13 @@ namespace DataAccess
 
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Category { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().HasMany(x => x.Products).WithMany(y => y.Users).UsingEntity(z => z.ToTable("Cart"));
         }
+
     }
 }

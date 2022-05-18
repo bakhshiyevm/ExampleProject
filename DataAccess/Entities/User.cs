@@ -13,5 +13,7 @@ namespace DataAccess.Entities
         public string PasswordHash { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+
+        public List<Product> Products { get; set; } = new List<Product>();
     }
 }

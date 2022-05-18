@@ -16,5 +16,7 @@ namespace DataAccess.Entities
         public Category Category { get; set; }
 
         public string Desc { get; set; }
+
+        public List<User> Users { get; set; } = new List<User>();
     }
 }
